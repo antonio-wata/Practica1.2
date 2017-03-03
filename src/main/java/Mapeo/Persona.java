@@ -5,6 +5,7 @@
  */
 package Mapeo;
 
+
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,6 +19,7 @@ import javax.persistence.Table;
  *
  * @author Antonio
  */
+@Entity
 @Table(name="persona")
 public class Persona {
     @Id @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -38,6 +40,7 @@ public class Persona {
     
     @Column (name="contrasena")
     private String password;
+    
     
     /**
      * 

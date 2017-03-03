@@ -68,6 +68,78 @@ public class PersonaDAO {
         }
         return person;
     }
+    
+    
+    public void Agregar(String nombre, String fecha, String correo,String contrasena, String carrera){
+        Persona p = null;
+        Session session = sessionFactory.openSession();
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            String hql = "INSERT INTO persona (nombre,fecha_nacimiento,correo,contrasena,carrera) VALUES ("+nombre+","+ fecha +","+ correo +"," + contrasena + "," + carrera +");";
+            Query query = session.createQuery(hql);
+            tx.commit();
+        }
+        catch (Exception e) {
+           if (tx!=null){ 
+               tx.rollback();
+           }
+           e.printStackTrace(); 
+        }finally {
+           session.close();
+         }
+    }
+        
+        
+         public void eliminar(Persona persona) {
+    
+        Session session = sessionFactory.openSession();
+        Transaction tx = null;
+        try {
+           tx = session.beginTransaction();
+         
+           session.delete(persona);
+           
+           tx.commit();
+        }
+        catch (Exception e) {
+           if (tx!=null){ 
+               tx.rollback();
+           }
+           e.printStackTrace(); 
+        }finally {
+           session.close();
+        }
+        
+       }
+         
+         
+        public void actualizar(Persona persona) {
+    
+        Session session = sessionFactory.openSession();
+        Transaction tx = null;
+        try {
+           tx = session.beginTransaction();
+         
+           session.update(persona);
+           
+           tx.commit();
+        }
+        catch (Exception e) {
+           if (tx!=null){ 
+               tx.rollback();
+           }
+           e.printStackTrace(); 
+        }finally {
+           session.close();
+        }
+    
+    }
+    
+    
+    
+    
+    
 }
 
 

@@ -23,7 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class Controlador {
     
     @Autowired
-    PersonaDAO persona_db;
+    PersonaDAO persona;
     
     @RequestMapping(value="/")
     public String inicio(){
@@ -45,7 +45,6 @@ public class Controlador {
     @RequestMapping(value="/persona1", method = RequestMethod.GET)
     public ModelAndView persona1(ModelMap model,HttpServletRequest request){
         Persona person = new Persona();
-        PersonaDAO personDAO = new PersonaDAO();
         String p = request.getParameter("nombre1");
         String c = request.getParameter("carrera1");
         String d = request.getParameter("cumpleanios");
@@ -57,14 +56,13 @@ public class Controlador {
         model.addAttribute("email1", e);
         model.addAttribute("password1", pas);
         
-        
         person.setNombre(p);
-        person.setCarrera(c);
         person.setFecha(d);
         person.setCorreo(e);
         person.setContrasena(pas);
-        
-        personDAO.guardar(person); //Aqui me esta dando el error
+        person.setCarrera(c);
+        persona.Agregar(p,d,e,pas,c);
+        persona.guardar(person);
         
         
         return new ModelAndView("registro_completo",model);
